@@ -3,13 +3,13 @@ import { useParams, Link, useLocation } from "react-router-dom";
 import RickAndMortyService from "../../services/RickAndMorty.service";
 
 const Detail = () => {
-  const [mascota, setMascota] = useState({});
+  const [character, setCharacter] = useState({});
   const { id } = useParams();
   const { pathname } = useLocation();
 
   useEffect(() => {
     console.log(pathname);
-    RickAndMortyService.getCharacterById(id).then((data) => setMascota(data));
+    RickAndMortyService.getCharacterById(id).then((data) => setCharacter(data));
   }, []);
 
   return (
@@ -18,16 +18,16 @@ const Detail = () => {
         <div className="card flex-md-row mb-4 box-shadow h-md-250">
           <div className="card-body d-flex flex-column align-items-start">
             <strong className="d-inline-block mb-2 text-success">
-              {mascota.species}
+              {character.species}
             </strong>
-            <h3 className="mb-0 text-dark"> {mascota.name} </h3>
+            <h3 className="mb-0 text-dark"> {character.name} </h3>
             <p className="mb-3">
-              {mascota.location &&
-                mascota.location.name &&
-                `Location: ${mascota.location.name}`}
+              {character.location &&
+                character.location.name &&
+                `Location: ${character.location.name}`}
             </p>
             <div className="mb-1 text-muted">
-              {new Date(mascota.created).toLocaleDateString()}
+              {new Date(character.created).toLocaleDateString()}
             </div>
             <div className="mb-1 text-muted"> </div>
             <p className="card-text mb-auto">
@@ -47,7 +47,7 @@ const Detail = () => {
             <img
               className="h-100 d-inline-block rounded card-img-right flex-auto d-none d-md-block m-4"
               height="auto"
-              src={mascota.image}
+              src={character.image}
               alt=""
             />
           </div>
